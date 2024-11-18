@@ -41,7 +41,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="Tbj-96-Sk3" kind="show" identifier="ShowDetails" id="bRW-0p-2CP"/>
+                                    <segue destination="Tbj-96-Sk3" kind="show" identifier="ShowDocumentSegue" id="Dc4-Y9-zfF"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
