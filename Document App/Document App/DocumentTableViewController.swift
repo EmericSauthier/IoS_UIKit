@@ -21,14 +21,19 @@ class DocumentTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return tableView.numberOfSections
     }
 
+    // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return tableView.numberOfRows(inSection: section)
+    }
+    
+    // Indique au Controller comment remplir la cellule avec les données
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
     }
 
     /*
