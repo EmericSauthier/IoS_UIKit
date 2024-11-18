@@ -75,10 +75,10 @@
             </objects>
             <point key="canvasLocation" x="-361.06870229007632" y="-711.26760563380287"/>
         </scene>
-        <!--Document View Controller-->
+        <!--Preview Controller-->
         <scene sceneID="bK4-aG-PwG">
             <objects>
-                <viewController id="Tbj-96-Sk3" customClass="DocumentViewController" customModule="Document_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Tbj-96-Sk3" customClass="QLPreviewController" customModule="Document_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a7k-7h-ZsK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -6,12 +6,10 @@
 //
 
 import UIKit
-import QuickLook
 
 class DocumentTableViewController: UITableViewController {
     
     var fileList: [DocumentFile]?
-    var previewController: QLPreviewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -125,19 +123,5 @@ extension Int {
         formatter.countStyle = .file
         
         return formatter.string(fromByteCount: Int64(self))
-    }
-}
-
-// Partie 9
-extension DocumentTableViewController {
-    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let file = fileList![indexPath.row]
-        
-        self.instantiateQLPreviewController(withUrl: file.url)
-    }
-
-    func instantiateQLPreviewController(withUrl url: URL) {
-        self.previewController = QLPreviewController(nibName: url.absoluteString, bundle: Bundle.main)
     }
 }
