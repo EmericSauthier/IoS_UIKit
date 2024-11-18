@@ -53,3 +53,12 @@ Nous venons d'ajouter un outil de navigation. Le NavigationController permet de 
 
 ### Est-ce que la NavigationBar est la même chose que le NavigationController ?
 La NavigationBar est une barre de navigation qui contient des icônes ou des textes qui permettent de renvoyer sur d'autre vues. Le NavigationController contient seulement les vues et gère leur affichage.
+
+# 5 - Bundle
+## Exercice 1
+### Liste des fichiers de Bundle.main
+- "alimentation-equilibree.png"
+- "du-vin.png"
+- "burger.png"
+- "ramen.png"
+- "pizza.png"
