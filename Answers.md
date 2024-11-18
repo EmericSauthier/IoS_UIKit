@@ -17,4 +17,4 @@ Le dossier "Assets.xcassets" contient l'ensemble des thèmes de couleur, des ic�
 Le storyboard est l'aperçu de l'application que nous développons. Cet aperçu est paramétrable grâce au menu situé sur la droite.  
 
 ### Qu'est-ce que le simulateur ?
-Le simulateur permet de lancer et de tester l'application sur 
+Le simulateur permet de lancer et de tester l'application sur le type d'appareil de son choix (Iphone 15 ...)
