@@ -5,7 +5,9 @@
 ### Qu'est-ce que les targets ?
 
 ### Quels sont les fichiers de bases et quelle est leur utilité ?
-Les fichiers créés de base sont : "AppDelegate", "SceneDelegate", "ViewController".
+Les fichiers créés de base sont : "AppDelegate.swift", "SceneDelegate.swift", "ViewController.swift", "Main.storyboard", "LaunchScreen.storyboard" et "Info.plist".
+Le fichier "AppDelegate" permet de 
+Le fichier "SceneDelegate" gère les scènes.
 
 ### A quoi sert le dossier "Assets.xcassets" ?
 Le dossier "Assets.xcassets" contient l'ensemble des thèmes de couleur, des icônes, images et sources de données de l'application.
