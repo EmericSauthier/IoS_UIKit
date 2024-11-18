@@ -1,4 +1,4 @@
-# SAUTHIER Emeric
+SAUTHIER Emeric
 
 # 1 - Environnement
 ## Exercice 1
