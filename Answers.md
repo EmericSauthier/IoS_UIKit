@@ -3,6 +3,7 @@
 # 1 - Environnement
 ## Exercice 1
 ### Qu'est-ce que les targets ?
+Les targets sont les paramètres généraux de l'application : sur quels appareils elle fonctionne, la version d'IOS, les différentes orientations autorisées, l'écran par défaut ...
 
 ### Quels sont les fichiers de bases et quelle est leur utilité ?
 Les fichiers créés de base sont : "AppDelegate.swift", "SceneDelegate.swift", "ViewController.swift", "Main.storyboard", "LaunchScreen.storyboard" et "Info.plist".  
