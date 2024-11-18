@@ -23,17 +23,23 @@ class DocumentTableViewController: UITableViewController {
 
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return tableView.numberOfSections
+        return 1 // tableView.numberOfSections
     }
 
     // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView.numberOfRows(inSection: section)
+        return DocumentFile.documents.count // tableView.numberOfRows(inSection: section)
     }
     
     // Indique au Controller comment remplir la cellule avec les données
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
+        
+        let document = DocumentFile.documents[indexPath.row]
+        cell.textLabel?.text = "\(document.title)"
+        cell.detailTextLabel?.text = "\(document.size)"
+        
+        return cell
     }
 
     /*
