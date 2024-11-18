@@ -67,3 +67,9 @@ La NavigationBar est une barre de navigation qui contient des icônes ou des tex
 ## Exercice 1
 ### Expliquer ce qu’est un Segue et à quoi il sert.
 Un Segue est un lien entre deux controlleurs. Il permet de renvoyer d'une vue à une autre.
+
+## Exercice 2
+### Qu’est-ce qu’une constraint ? A quoi sert-elle ? Quel est le lien avec AutoLayout ?
+Une constraint est une contrainte d'affichage entre un objet graphique et un référentiel. Dans notre cas, l'image (=objet) se positionne par rapport à l'écran de l'appareil (=référentiel).
+Les constraints permettent donc de gérer l'affichage (position, taille ...) des éléments graphiques.
+AutoLayout gère ces contraintes automatiquement, afin de centrer l'élément par exemple.
