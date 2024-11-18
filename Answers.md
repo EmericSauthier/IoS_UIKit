@@ -26,3 +26,9 @@ Ce raccourci permet de builder l'application et de lancer le simulateur.
 
 ### A quoi sert le raccourci Cmd + Shift + O ?
 Ce raccourci permet de rechercher rapidement des fichiers, fonctions ou autre dans le projet.
+
+### Trouver le raccourci pour indenter le code automatiquement.
+Ctrl + i
+
+### Trouver le raccourci pour commenter la selection.
+Cmd + /
