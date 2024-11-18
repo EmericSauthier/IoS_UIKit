@@ -73,3 +73,8 @@ Un Segue est un lien entre deux controlleurs. Il permet de renvoyer d'une vue à
 Une constraint est une contrainte d'affichage entre un objet graphique et un référentiel. Dans notre cas, l'image (=objet) se positionne par rapport à l'écran de l'appareil (=référentiel).
 Les constraints permettent donc de gérer l'affichage (position, taille ...) des éléments graphiques.
 AutoLayout gère ces contraintes automatiquement, afin de centrer l'élément par exemple.
+
+# 9 - QLPreview
+## Questions
+### Pourquoi serait-il plus pertinent de changer l’accessory de nos cellules pour un disclosureIndicator ?
+Parce que
