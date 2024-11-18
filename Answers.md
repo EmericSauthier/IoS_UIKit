@@ -19,3 +19,10 @@ Le storyboard est l'aperçu de l'application que nous développons. Cet aperçu 
 
 ### Qu'est-ce que le simulateur ?
 Le simulateur permet de lancer et de tester l'application sur le type d'appareil de son choix (Iphone 15 ...)
+
+## Exercice 2
+### A quoi sert le raccourci Cmd + R ?
+Ce raccourci permet de builder l'application et de lancer le simulateur.
+
+### A quoi sert le raccourci Cmd + Shift + O ?
+Ce raccourci permet de rechercher rapidement des fichiers, fonctions ou autre dans le projet.
