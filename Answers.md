@@ -62,3 +62,8 @@ La NavigationBar est une barre de navigation qui contient des icônes ou des tex
 - "burger.png"
 - "ramen.png"
 - "pizza.png"
+
+# 6 - Ecran Detail
+## Exercice 1
+### Expliquer ce qu’est un Segue et à quoi il sert.
+Un Segue est un lien entre deux controlleurs. Il permet de renvoyer d'une vue à une autre.
