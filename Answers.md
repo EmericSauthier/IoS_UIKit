@@ -6,6 +6,9 @@
 
 ### Quels sont les fichiers de bases et quelle est leur utilité ?
 
+### A quoi sert le dossier "Assets.xcassets" ?
+Le dossier "Assets.xcassets" contient l'ensemble des thèmes de couleur, des icônes et images de l'application.
+
 ### Qu'est-ce que le storyboard ?
 Le storyboard est l'aperçu de l'application que nous développons. Cet aperçu est paramétrable grâce au menu situé sur la droite.
 
