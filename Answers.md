@@ -38,8 +38,18 @@ Tester avec Iphone 15 et Ipad Pro.
 
 # 3 - Delegation
 ## Exercice 1
+### Expliquer l’intérêt d’une propriété statique en programmation.
 L'intérêt d'une propriété statique est de pouvoir y accéder grâce à la classe/structure et non par l'intermédiaire d'un objet.  
 Dans notre cas, nous accéderons à la liste de documents comme ceci : _DocumentFile.documents_
 
 ## Exercice 2
+### Expliquer pourquoi dequeueReusableCell est important pour les performances de l’application.
 L'utilisation de dequeueReusableCell est important pour les performances car il permet de réutiliser les cellules déjà existantes, cela évite de recréer les mêmes cellules et de les stocker en double par exemple.
+
+# 4 - Navigation
+## Exercice 1
+### Que venons nous de faire en réalité ? Quel est le rôle du NavigationController ?
+Nous venons d'ajouter un outil de navigation. Le NavigationController permet de gérer la navigation entre les vues.
+
+### Est-ce que la NavigationBar est la même chose que le NavigationController ?
+La NavigationBar est une barre de navigation qui contient des icônes ou des textes qui permettent de renvoyer sur d'autre vues. Le NavigationController contient seulement les vues et gère leur affichage.
