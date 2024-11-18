@@ -35,3 +35,8 @@ Cmd + /
 
 ## Exercice 3
 Tester avec Iphone 15 et Ipad Pro.
+
+# 3 - Delegation
+## Exercice 1
+L'intérêt d'une propriété statique est de pouvoir y accéder grâce à la classe/structure et non par l'intermédiaire d'un objet.  
+Dans notre cas, nous accéderons à la liste de documents comme ceci : _DocumentFile.documents_
