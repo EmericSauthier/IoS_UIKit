@@ -8,7 +8,7 @@
 import UIKit
 
 class DocumentTableViewController: UITableViewController {
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -77,6 +77,24 @@ class DocumentTableViewController: UITableViewController {
             // Retourne la liste de documents
             return documentListBundle
         }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier != "ShowDocumentSegue" { return }
+        
+        // 1. Récuperer l'index de la ligne sélectionnée
+        guard let index = tableView.indexPathForSelectedRow else { return }
+        
+        // 2. Récuperer le document correspondant à l'index
+        let document = listFileInBundle()[index.row]
+        
+        // 3. Cibler l'instance de DocumentViewController via le segue.destination
+        // 4. Caster le segue.destination en DocumentViewController
+        if let target = segue.destination as? DocumentViewController {
+            
+            // 5. Remplir la variable imageName de l'instance de DocumentViewController avec le nom de l'image du document
+            target.imageName = document.imageName
+        }
+    }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -158,7 +176,7 @@ struct DocumentFile {
 
 extension Int {
     func formattedSize() -> String {
-        var formatter = ByteCountFormatter()
+        let formatter = ByteCountFormatter()
         
         formatter.countStyle = .file
         

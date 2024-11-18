@@ -12,6 +12,7 @@
 		8A05183A2CEB72B400BB52AB /* alimentation-equilibree.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0518352CEB72B200BB52AB /* alimentation-equilibree.png */; };
 		8A05183B2CEB72B400BB52AB /* burger.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0518362CEB72B300BB52AB /* burger.png */; };
 		8A05183C2CEB72B400BB52AB /* pizza.png in Resources */ = {isa = PBXBuildFile; fileRef = 8A0518372CEB72B400BB52AB /* pizza.png */; };
+		8A05183E2CEB856500BB52AB /* DocumentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A05183D2CEB856500BB52AB /* DocumentViewController.swift */; };
 		8A96DCFF2CEB285300F465DD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96DCFE2CEB285300F465DD /* AppDelegate.swift */; };
 		8A96DD012CEB285300F465DD /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96DD002CEB285300F465DD /* SceneDelegate.swift */; };
 		8A96DD032CEB285300F465DD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A96DD022CEB285300F465DD /* ViewController.swift */; };
@@ -27,6 +28,7 @@
 		8A0518352CEB72B200BB52AB /* alimentation-equilibree.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alimentation-equilibree.png"; sourceTree = "<group>"; };
 		8A0518362CEB72B300BB52AB /* burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = burger.png; sourceTree = "<group>"; };
 		8A0518372CEB72B400BB52AB /* pizza.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pizza.png; sourceTree = "<group>"; };
+		8A05183D2CEB856500BB52AB /* DocumentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentViewController.swift; sourceTree = "<group>"; };
 		8A96DCFB2CEB285300F465DD /* Document App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Document App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8A96DCFE2CEB285300F465DD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8A96DD002CEB285300F465DD /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				8A0518372CEB72B400BB52AB /* pizza.png */,
 				8A0518332CEB72B000BB52AB /* ramen.png */,
 				8A96DCFE2CEB285300F465DD /* AppDelegate.swift */,
+				8A05183D2CEB856500BB52AB /* DocumentViewController.swift */,
 				8AA5F96C2CEB47A50098554A /* DocumentTableViewController.swift */,
 				8A96DD002CEB285300F465DD /* SceneDelegate.swift */,
 				8A96DD022CEB285300F465DD /* ViewController.swift */,
@@ -161,6 +164,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A05183E2CEB856500BB52AB /* DocumentViewController.swift in Sources */,
 				8A96DD032CEB285300F465DD /* ViewController.swift in Sources */,
 				8A96DCFF2CEB285300F465DD /* AppDelegate.swift in Sources */,
 				8AA5F96D2CEB47A50098554A /* DocumentTableViewController.swift in Sources */,
