@@ -32,3 +32,6 @@ Ctrl + i
 
 ### Trouver le raccourci pour commenter la selection.
 Cmd + /
+
+## Exercice 3
+Tester avec Iphone 15 et Ipad Pro.
