@@ -23,24 +23,60 @@ class DocumentTableViewController: UITableViewController {
 
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1 // tableView.numberOfSections
+        return 1
     }
 
     // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DocumentFile.documents.count // tableView.numberOfRows(inSection: section)
+        return listFileInBundle().count
+        // return DocumentFile.documents.count
     }
     
     // Indique au Controller comment remplir la cellule avec les données
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        let document = DocumentFile.documents[indexPath.row]
+        let document = listFileInBundle()[indexPath.row]
         cell.textLabel?.text = "\(document.title)"
         cell.detailTextLabel?.text = "\(document.size.formattedSize())"
         
         return cell
     }
+    
+    // Récupère la liste des documents
+    func listFileInBundle() -> [DocumentFile] {
+            // Récupère le dossier courant
+            let fm = FileManager.default
+            // Récupère le chemin absolu du dossier dans lequel les ressources sont contenues
+            let path = Bundle.main.resourcePath!
+            // Récupère les fichiers contenus dans le dossier
+            let items = try! fm.contentsOfDirectory(atPath: path)
+            
+            // Initialise un liste vide
+            var documentListBundle = [DocumentFile]()
+        
+            // Boucle sur tous les fichiers présents dans le dossier
+            for item in items {
+                // Vérifie si l'extension du fichier n'est pas DS_Store mais est .png
+                if !item.hasSuffix("DS_Store") && item.hasSuffix(".png") {
+                    // Récupère le chemin du fichier
+                    let currentUrl = URL(fileURLWithPath: path + "/" + item)
+                    // Récupère les informations du fichier (type, nom, taille)
+                    let resourcesValues = try! currentUrl.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
+                    
+                    // Ajout un document à la liste
+                    documentListBundle.append(DocumentFile(
+                        title: resourcesValues.name!,
+                        size: resourcesValues.fileSize ?? 0,
+                        imageName: item,
+                        url: currentUrl,
+                        type: resourcesValues.contentType!.description)
+                    )
+                }
+            }
+            // Retourne la liste de documents
+            return documentListBundle
+        }
 
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
