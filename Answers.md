@@ -40,3 +40,6 @@ Tester avec Iphone 15 et Ipad Pro.
 ## Exercice 1
 L'intérêt d'une propriété statique est de pouvoir y accéder grâce à la classe/structure et non par l'intermédiaire d'un objet.  
 Dans notre cas, nous accéderons à la liste de documents comme ceci : _DocumentFile.documents_
+
+## Exercice 2
+L'utilisation de dequeueReusableCell est important pour les performances car il permet de réutiliser les cellules déjà existantes, cela évite de recréer les mêmes cellules et de les stocker en double par exemple.
