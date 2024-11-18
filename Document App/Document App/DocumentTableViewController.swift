@@ -37,7 +37,7 @@ class DocumentTableViewController: UITableViewController {
         
         let document = DocumentFile.documents[indexPath.row]
         cell.textLabel?.text = "\(document.title)"
-        cell.detailTextLabel?.text = "\(document.size)"
+        cell.detailTextLabel?.text = "\(document.size.formattedSize())"
         
         return cell
     }
@@ -118,4 +118,14 @@ struct DocumentFile {
         DocumentFile(title: "Document 9", size: 900, imageName: nil, url: URL(string: "https://www.apple.com")!, type: "text/plain"),
         DocumentFile(title: "Document 10", size: 1000, imageName: nil, url: URL(string: "https://www.apple.com")!, type: "text/plain"),
     ]
+}
+
+extension Int {
+    func formattedSize() -> String {
+        var formatter = ByteCountFormatter()
+        
+        formatter.countStyle = .file
+        
+        return formatter.string(fromByteCount: Int64(self))
+    }
 }
