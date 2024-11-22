@@ -166,6 +166,11 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         let selectedIndex = tableView.indexPathForSelectedRow!
+        let section = selectedIndex.section
+        
+        if section == 0 {
+            return importList![selectedIndex.row].url as QLPreviewItem
+        }
         return fileList![selectedIndex.row].url as QLPreviewItem
     }
 }
@@ -177,11 +182,14 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
 extension DocumentTableViewController : UIDocumentPickerDelegate {
     @objc func addDocument() {
         let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
+        
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .overFullScreen
+        
         present(documentPicker, animated: true)
     }
     
+    // Sélection d'un fichier
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         dismiss(animated: true)
         
@@ -200,10 +208,12 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
         tableView.reloadData()
     }
     
+    // Prise en compte du cas où l'on quitte sans sélectionner de fichier
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
         
     }
     
+    // Copie du fichier dans le dossier de l'application
     func copyFileToDocumentsDirectory(fromUrl url: URL) {
         // On récupère le dossier de l'application, dossier où nous avons le droit d'écrire nos fichiers
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -215,12 +225,14 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
             // Puis nous copions le fichier depuis l'URL source vers l'URL de destination
             try FileManager.default.copyItem(at: url, to: destinationUrl)
             
+            // Récupération des infos du fichiers
             let resourcesValues = try! destinationUrl.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
             
-            self.fileList!.append(DocumentFile(
+            // Ajout du document à la liste des documents importés
+            self.importList!.append(DocumentFile(
                 title: resourcesValues.name!,
                 size: resourcesValues.fileSize ?? 0,
-                imageName: url.lastPathComponent,
+                imageName: destinationUrl.lastPathComponent,
                 url: destinationUrl,
                 type: resourcesValues.contentType!.description)
             )
