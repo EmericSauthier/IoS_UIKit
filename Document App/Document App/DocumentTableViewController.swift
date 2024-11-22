@@ -10,11 +10,15 @@ import QuickLook
 
 class DocumentTableViewController: UITableViewController {
     
+    let sections = ["Importés", "Bundle"]
+    
     var fileList: [DocumentFile]?
     var fileListFiltered: [DocumentFile]?
     
     var importList: [DocumentFile]?
     var importListFiltered: [DocumentFile]?
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,21 +29,28 @@ class DocumentTableViewController: UITableViewController {
         
         fileList = listFileInBundle()
         importList = listImportedFiles()
+        fileListFiltered = listFileInBundle()
+        importListFiltered = listImportedFiles()
+        
+        setupSearchController()
     }
+    
     
     // MARK: - Table view data source
     
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return sections.count
     }
+    
+    // Indique le titre de la section
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return section == 0 ? "Importés" : "Bundle"
+        return sections[section]
     }
     
     // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return section == 0 ? importList!.count : fileList!.count
+        return section == 0 ? importListFiltered!.count : fileListFiltered!.count
         // return DocumentFile.documents.count
     }
     
@@ -47,18 +58,11 @@ class DocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        let document = indexPath.section == 0 ? importList![indexPath.row] : fileList![indexPath.row]
+        let document = indexPath.section == 0 ? importListFiltered![indexPath.row] : fileListFiltered![indexPath.row]
         cell.textLabel?.text = "\(document.title)"
         cell.detailTextLabel?.text = "\(document.size.formattedSize())"
         
         return cell
-    }
-    
-    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let file = fileList![indexPath.row]
-        
-        self.instantiateQLPreviewController(withUrl: file.url)
     }
     
     
@@ -126,7 +130,7 @@ class DocumentTableViewController: UITableViewController {
     }
     
     
-    // MARK: - Renvoie vers la vue de détail
+    // MARK: - Renvoi vers la vue de détail
     
     // Instantiation d'un QLPreviewController
     func instantiateQLPreviewController(withUrl url: URL) {
@@ -160,6 +164,19 @@ class DocumentTableViewController: UITableViewController {
 
 // Implémentation du protocole QLPreviewControllerDataSource
 extension DocumentTableViewController : QLPreviewControllerDataSource {
+    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var file: DocumentFile
+        if indexPath.section == 0 {
+            file = importListFiltered![indexPath.row]
+        }
+        else {
+            file = fileListFiltered![indexPath.row]
+        }
+        
+        self.instantiateQLPreviewController(withUrl: file.url)
+    }
+    
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
         return 1
     }
@@ -168,9 +185,9 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
         let selectedIndex = tableView.indexPathForSelectedRow!
         
         if selectedIndex.section == 0 {
-            return importList![selectedIndex.row].url as QLPreviewItem
+            return importListFiltered![selectedIndex.row].url as QLPreviewItem
         }
-        return fileList![selectedIndex.row].url as QLPreviewItem
+        return fileListFiltered![selectedIndex.row].url as QLPreviewItem
     }
 }
 
@@ -238,6 +255,43 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
         } catch {
             print(error)
         }
+    }
+}
+
+
+// MARK: - Search Bar
+extension DocumentTableViewController : UISearchResultsUpdating, UISearchControllerDelegate, UISearchBarDelegate {
+    // Mise à jour de l'affichage en fonction des filtres
+    func updateSearchResults(for searchController: UISearchController) {
+        fileListFiltered = fileList
+        importListFiltered = importList
+        
+        if let searchBarText = searchController.searchBar.text?.lowercased() {
+            // Lorsque le champs de saisie est vide on refresh et on sort de la méthode
+            guard !searchBarText.isEmpty else { tableView.reloadData(); return }
+            
+            fileListFiltered = fileListFiltered!.filter({ $0.title.lowercased().contains(searchBarText) })
+            importListFiltered = importListFiltered!.filter({ $0.title.lowercased().contains(searchBarText) })
+        }
+        
+        // Refresh des données
+        tableView.reloadData()
+    }
+    
+    // Initialisation du searchController
+    func setupSearchController() {
+        self.searchController.searchResultsUpdater = self
+        self.searchController.obscuresBackgroundDuringPresentation = false
+        self.searchController.hidesNavigationBarDuringPresentation = false
+        self.searchController.searchBar.placeholder = "Rechercher un document"
+        
+        self.navigationItem.searchController = searchController
+        self.definesPresentationContext = false
+        self.navigationItem.hidesSearchBarWhenScrolling = false
+        
+        searchController.delegate = self
+        searchController.searchBar.delegate = self
+        searchController.searchBar.setImage(UIImage(systemName: "line.horizontal.3.decrease"), for: .bookmark, state: .normal)
     }
 }
 
