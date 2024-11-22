@@ -11,7 +11,10 @@ import QuickLook
 class DocumentTableViewController: UITableViewController {
     
     var fileList: [DocumentFile]?
+    var fileListFiltered: [DocumentFile]?
+    
     var importList: [DocumentFile]?
+    var importListFiltered: [DocumentFile]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +53,16 @@ class DocumentTableViewController: UITableViewController {
         
         return cell
     }
+    
+    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let file = fileList![indexPath.row]
+        
+        self.instantiateQLPreviewController(withUrl: file.url)
+    }
+    
+    
+    // MARK: - Récupération des fichiers
     
     // Récupère la liste des documents
     func listFileInBundle() -> [DocumentFile] {
@@ -90,11 +103,13 @@ class DocumentTableViewController: UITableViewController {
     func listImportedFiles() -> [DocumentFile] {
         let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
+        // Récupération des url des fichiers du dossier
         let items = try! FileManager.default.contentsOfDirectory(at: documentsDirectory, includingPropertiesForKeys: nil)
         
         var documentsList = [DocumentFile]()
         
         for item in items {
+            // Récupération des infos du fichier
             let resourcesValues = try! item.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
             
             // Ajout un document à la liste
@@ -110,12 +125,8 @@ class DocumentTableViewController: UITableViewController {
         return documentsList
     }
     
-    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let file = fileList![indexPath.row]
-        
-        self.instantiateQLPreviewController(withUrl: file.url)
-    }
+    
+    // MARK: - Renvoie vers la vue de détail
     
     // Instantiation d'un QLPreviewController
     func instantiateQLPreviewController(withUrl url: URL) {
@@ -124,6 +135,7 @@ class DocumentTableViewController: UITableViewController {
         navigationController?.pushViewController(qlPreviewController, animated: true)
     }
     
+    // Avec segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "ShowDocumentSegue" { return }
         
@@ -143,6 +155,9 @@ class DocumentTableViewController: UITableViewController {
     }
 }
 
+
+// MARK: - QLPreviewController
+
 // Implémentation du protocole QLPreviewControllerDataSource
 extension DocumentTableViewController : QLPreviewControllerDataSource {
     func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
@@ -154,6 +169,9 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
         return fileList![selectedIndex.row].url as QLPreviewItem
     }
 }
+
+
+// MARK: - DocumentPicker
 
 // Partie 10
 extension DocumentTableViewController : UIDocumentPickerDelegate {
@@ -212,6 +230,8 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
     }
 }
 
+
+// MARK: - Structure DocumentFile
 struct DocumentFile {
     var title: String
     var size: Int
@@ -232,6 +252,9 @@ struct DocumentFile {
         DocumentFile(title: "Document 10", size: 1000, imageName: nil, url: URL(string: "https://www.apple.com")!, type: "text/plain"),
     ]
 }
+
+
+// MARK: - Extension de Int
 
 extension Int {
     func formattedSize() -> String {
