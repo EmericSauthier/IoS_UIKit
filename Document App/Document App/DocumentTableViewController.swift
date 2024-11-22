@@ -166,9 +166,8 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
     
     func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
         let selectedIndex = tableView.indexPathForSelectedRow!
-        let section = selectedIndex.section
         
-        if section == 0 {
+        if selectedIndex.section == 0 {
             return importList![selectedIndex.row].url as QLPreviewItem
         }
         return fileList![selectedIndex.row].url as QLPreviewItem
