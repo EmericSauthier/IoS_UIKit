@@ -127,7 +127,9 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
 }
 
 extension DocumentTableViewController : UIDocumentPickerDelegate {
-    
+    @objc func addDocument() {
+        
+    }
 }
 
 struct DocumentFile {
