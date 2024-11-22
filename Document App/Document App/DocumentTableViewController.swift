@@ -21,14 +21,14 @@ class DocumentTableViewController: UITableViewController {
         
         fileList = listFileInBundle()
     }
-
+    
     // MARK: - Table view data source
     
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return fileList!.count
@@ -48,38 +48,38 @@ class DocumentTableViewController: UITableViewController {
     
     // Récupère la liste des documents
     func listFileInBundle() -> [DocumentFile] {
-            // Récupère le dossier courant
-            let fm = FileManager.default
-            // Récupère le chemin absolu du dossier dans lequel les ressources sont contenues
-            let path = Bundle.main.resourcePath!
-            // Récupère les fichiers contenus dans le dossier
-            let items = try! fm.contentsOfDirectory(atPath: path)
-            
-            // Initialise un liste vide
-            var documentListBundle = [DocumentFile]()
+        // Récupère le dossier courant
+        let fm = FileManager.default
+        // Récupère le chemin absolu du dossier dans lequel les ressources sont contenues
+        let path = Bundle.main.resourcePath!
+        // Récupère les fichiers contenus dans le dossier
+        let items = try! fm.contentsOfDirectory(atPath: path)
         
-            // Boucle sur tous les fichiers présents dans le dossier
-            for item in items {
-                // Vérifie si l'extension du fichier n'est pas DS_Store mais est .png
-                if !item.hasSuffix("DS_Store") { // && item.hasSuffix(".png") {
-                    // Récupère le chemin du fichier
-                    let currentUrl = URL(fileURLWithPath: path + "/" + item)
-                    // Récupère les informations du fichier (type, nom, taille)
-                    let resourcesValues = try! currentUrl.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
-                    
-                    // Ajout un document à la liste
-                    documentListBundle.append(DocumentFile(
-                        title: resourcesValues.name!,
-                        size: resourcesValues.fileSize ?? 0,
-                        imageName: item,
-                        url: currentUrl,
-                        type: resourcesValues.contentType!.description)
-                    )
-                }
+        // Initialise un liste vide
+        var documentListBundle = [DocumentFile]()
+        
+        // Boucle sur tous les fichiers présents dans le dossier
+        for item in items {
+            // Vérifie si l'extension du fichier n'est pas DS_Store mais est .png
+            if !item.hasSuffix("DS_Store") { // && item.hasSuffix(".png") {
+                // Récupère le chemin du fichier
+                let currentUrl = URL(fileURLWithPath: path + "/" + item)
+                // Récupère les informations du fichier (type, nom, taille)
+                let resourcesValues = try! currentUrl.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
+                
+                // Ajout un document à la liste
+                documentListBundle.append(DocumentFile(
+                    title: resourcesValues.name!,
+                    size: resourcesValues.fileSize ?? 0,
+                    imageName: item,
+                    url: currentUrl,
+                    type: resourcesValues.contentType!.description)
+                )
             }
-            // Retourne la liste de documents
-            return documentListBundle
         }
+        // Retourne la liste de documents
+        return documentListBundle
+    }
     
     // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -137,21 +137,21 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         dismiss(animated: true)
-
+        
         guard url.startAccessingSecurityScopedResource() else {
             return
         }
-
+        
         defer {
             url.stopAccessingSecurityScopedResource()
         }
-
+        
         // Copie du fichier
         copyFileToDocumentsDirectory(fromUrl: url)
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
-
+        
     }
     
     func copyFileToDocumentsDirectory(fromUrl url: URL) {
@@ -164,6 +164,7 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
         do {
             // Puis nous copions le fichier depuis l'URL source vers l'URL de destination
             try FileManager.default.copyItem(at: url, to: destinationUrl)
+            //fileList = listFileInBundle()
         } catch {
             print(error)
         }
