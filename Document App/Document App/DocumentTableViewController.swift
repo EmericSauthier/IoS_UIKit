@@ -17,7 +17,7 @@ class DocumentTableViewController: UITableViewController {
         
         // Personnalisation de la barre de navigation
         navigationItem.title = "📑 Liste des documents"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument))
         
         fileList = listFileInBundle()
     }
@@ -124,6 +124,10 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
         let selectedIndex = tableView.indexPathForSelectedRow!
         return fileList![selectedIndex.row].url as QLPreviewItem
     }
+}
+
+extension DocumentTableViewController : UIDocumentPickerDelegate {
+    
 }
 
 struct DocumentFile {
