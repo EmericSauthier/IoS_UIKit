@@ -96,3 +96,8 @@ ex : navigationItem.rightBarButtonItems = [ UIBarButtonItem(barButtonSystemItem:
 
 ### A quoi sert la fonction defer ?
 La fonction defer permet d'exécuter le code à l'intérieur une fois que les autres exécutions sont terminées.
+
+# Bonus
+Search Bar faite
+Icône faite
+Couleur faite
