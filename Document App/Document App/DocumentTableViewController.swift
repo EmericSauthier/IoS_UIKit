@@ -8,7 +8,7 @@
 import UIKit
 import QuickLook
 
-class DocumentTableViewController: UITableViewController, QLPreviewControllerDataSource {
+class DocumentTableViewController: UITableViewController {
     
     var fileList: [DocumentFile]?
     
@@ -19,16 +19,6 @@ class DocumentTableViewController: UITableViewController, QLPreviewControllerDat
     }
 
     // MARK: - Table view data source
-
-    
-    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
-        return 1
-    }
-    
-    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
-        let selectedIndex = tableView.indexPathForSelectedRow!
-        return fileList![selectedIndex.row].url as QLPreviewItem
-    }
     
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -94,9 +84,11 @@ class DocumentTableViewController: UITableViewController, QLPreviewControllerDat
         self.instantiateQLPreviewController(withUrl: file.url)
     }
     
+    // Instantiation d'un QLPreviewController
     func instantiateQLPreviewController(withUrl url: URL) {
         let qlPreviewController = QLPreviewController()
-        qlPreviewController.dataSource = self
+         qlPreviewController.dataSource = self
+        // qlPreviewController.delegate = self
         navigationController?.pushViewController(qlPreviewController, animated: true)
     }
     
@@ -116,6 +108,18 @@ class DocumentTableViewController: UITableViewController, QLPreviewControllerDat
             // 5. Remplir la variable imageName de l'instance de DocumentViewController avec le nom de l'image du document
             target.imageName = document.imageName
         }
+    }
+}
+
+// Implémentation du protocole QLPreviewControllerDataSource
+extension DocumentTableViewController : QLPreviewControllerDataSource {
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let selectedIndex = tableView.indexPathForSelectedRow!
+        return fileList![selectedIndex.row].url as QLPreviewItem
     }
 }
 

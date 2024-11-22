@@ -104,35 +104,6 @@
             </objects>
             <point key="canvasLocation" x="-1596.1832061068701" y="-802.11267605633805"/>
         </scene>
-        <!--QLPreviewController-->
-        <scene sceneID="vlQ-1E-WBF">
-            <objects>
-                <viewController title="QLPreviewController" id="qFB-dj-n3H" customClass="QLPreviewController" customModule="Document_App" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="wXn-TA-gv9">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JkH-70-hHb">
-                                <rect key="frame" x="76" y="327" width="256" height="256"/>
-                            </imageView>
-                        </subviews>
-                        <viewLayoutGuide key="safeArea" id="Cet-7E-iq8"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="JkH-70-hHb" firstAttribute="top" secondItem="Cet-7E-iq8" secondAttribute="top" constant="268" id="TZR-PJ-DBp"/>
-                            <constraint firstItem="JkH-70-hHb" firstAttribute="leading" secondItem="Cet-7E-iq8" secondAttribute="leading" constant="76" id="Tju-FJ-ZE0"/>
-                            <constraint firstItem="Cet-7E-iq8" firstAttribute="trailing" secondItem="JkH-70-hHb" secondAttribute="trailing" constant="61" id="do9-WZ-wqD"/>
-                            <constraint firstItem="Cet-7E-iq8" firstAttribute="bottom" secondItem="JkH-70-hHb" secondAttribute="bottom" constant="235" id="ehr-TC-0bp"/>
-                        </constraints>
-                    </view>
-                    <connections>
-                        <outlet property="imageView" destination="JkH-70-hHb" id="pmQ-gR-YQX"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="HS7-Qi-Nta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2311" y="-949"/>
-        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">
