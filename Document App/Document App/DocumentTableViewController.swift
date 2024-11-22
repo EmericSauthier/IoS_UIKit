@@ -267,7 +267,7 @@ extension DocumentTableViewController : UISearchResultsUpdating, UISearchControl
         importListFiltered = importList
         
         if let searchBarText = searchController.searchBar.text?.lowercased() {
-            // Lorsque le champs de saisie est vide on refresh et on sort de la méthode
+            // Lorsque le champs de saisie est vide, on refresh et on sort de la méthode
             guard !searchBarText.isEmpty else { tableView.reloadData(); return }
             
             fileListFiltered = fileListFiltered!.filter({ $0.title.lowercased().contains(searchBarText) })
