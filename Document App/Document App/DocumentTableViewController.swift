@@ -29,8 +29,8 @@ class DocumentTableViewController: UITableViewController {
         
         fileList = listFileInBundle()
         importList = listImportedFiles()
-        fileListFiltered = listFileInBundle()
-        importListFiltered = listImportedFiles()
+        fileListFiltered = fileList
+        importListFiltered = importList
         
         setupSearchController()
     }
