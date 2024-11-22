@@ -15,6 +15,10 @@ class DocumentTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Personnalisation de la barre de navigation
+        navigationItem.title = "📑 Liste des documents"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: nil)
+        
         fileList = listFileInBundle()
     }
 
