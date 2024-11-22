@@ -87,7 +87,7 @@ class DocumentTableViewController: UITableViewController {
     // Instantiation d'un QLPreviewController
     func instantiateQLPreviewController(withUrl url: URL) {
         let qlPreviewController = QLPreviewController()
-         qlPreviewController.dataSource = self
+        qlPreviewController.dataSource = self
         navigationController?.pushViewController(qlPreviewController, animated: true)
     }
     
