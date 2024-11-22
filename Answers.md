@@ -93,3 +93,6 @@ Il faut mettre le mot clé @objc devant la fonction addDocument afin que la réf
 ### Peut-on ajouter plusieurs boutons dans la barre de navigation ? Si oui, comment en code ?
 Il est possible d'ajouter plusieurs boutons dans la barre de navigation, grâce aux propriétés rightBarButtonItems et leftBarButtonItems.  
 ex : navigationItem.rightBarButtonItems = [ UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument)), UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument)) ]
+
+### A quoi sert la fonction defer ?
+La fonction defer permet d'exécuter le code à l'intérieur une fois que les autres exécutions sont terminées.
