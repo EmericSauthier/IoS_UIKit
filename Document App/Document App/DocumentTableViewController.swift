@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import QuickLook
 
-class DocumentTableViewController: UITableViewController {
+class DocumentTableViewController: UITableViewController, QLPreviewControllerDataSource {
     
     var fileList: [DocumentFile]?
     
@@ -19,6 +20,16 @@ class DocumentTableViewController: UITableViewController {
 
     // MARK: - Table view data source
 
+    
+    func numberOfPreviewItems(in controller: QLPreviewController) -> Int {
+        return 1
+    }
+    
+    func previewController(_ controller: QLPreviewController, previewItemAt index: Int) -> QLPreviewItem {
+        let selectedIndex = tableView.indexPathForSelectedRow!
+        return fileList![selectedIndex.row].url as QLPreviewItem
+    }
+    
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
@@ -75,6 +86,19 @@ class DocumentTableViewController: UITableViewController {
             // Retourne la liste de documents
             return documentListBundle
         }
+    
+    // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let file = fileList![indexPath.row]
+        
+        self.instantiateQLPreviewController(withUrl: file.url)
+    }
+    
+    func instantiateQLPreviewController(withUrl url: URL) {
+        let qlPreviewController = QLPreviewController()
+        qlPreviewController.dataSource = self
+        navigationController?.pushViewController(qlPreviewController, animated: true)
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier != "ShowDocumentSegue" { return }

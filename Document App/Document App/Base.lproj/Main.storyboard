@@ -40,9 +40,6 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
-                                <connections>
-                                    <segue destination="Tbj-96-Sk3" kind="show" identifier="ShowDocumentSegue" id="Dc4-Y9-zfF"/>
-                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -107,10 +104,10 @@
             </objects>
             <point key="canvasLocation" x="-1596.1832061068701" y="-802.11267605633805"/>
         </scene>
-        <!--Preview Controller-->
+        <!--QLPreviewController-->
         <scene sceneID="vlQ-1E-WBF">
             <objects>
-                <viewController id="qFB-dj-n3H" customClass="QLPreviewController" customModule="Document_App" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="QLPreviewController" id="qFB-dj-n3H" customClass="QLPreviewController" customModule="Document_App" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wXn-TA-gv9">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -128,6 +125,9 @@
                             <constraint firstItem="Cet-7E-iq8" firstAttribute="bottom" secondItem="JkH-70-hHb" secondAttribute="bottom" constant="235" id="ehr-TC-0bp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="imageView" destination="JkH-70-hHb" id="pmQ-gR-YQX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HS7-Qi-Nta" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
