@@ -61,7 +61,7 @@ class DocumentTableViewController: UITableViewController {
             // Boucle sur tous les fichiers présents dans le dossier
             for item in items {
                 // Vérifie si l'extension du fichier n'est pas DS_Store mais est .png
-                if !item.hasSuffix("DS_Store") && item.hasSuffix(".png") {
+                if !item.hasSuffix("DS_Store") { // && item.hasSuffix(".png") {
                     // Récupère le chemin du fichier
                     let currentUrl = URL(fileURLWithPath: path + "/" + item)
                     // Récupère les informations du fichier (type, nom, taille)
@@ -126,9 +126,47 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
     }
 }
 
+// Partie 10
 extension DocumentTableViewController : UIDocumentPickerDelegate {
     @objc func addDocument() {
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [])
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .overFullScreen
+        present(documentPicker, animated: true)
+    }
+    
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        dismiss(animated: true)
+
+        guard url.startAccessingSecurityScopedResource() else {
+            return
+        }
+
+        defer {
+            url.stopAccessingSecurityScopedResource()
+        }
+
+        // Copie du fichier
+        copyFileToDocumentsDirectory(fromUrl: url)
+    }
+    
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+
+    }
+    
+    func copyFileToDocumentsDirectory(fromUrl url: URL) {
+        // On récupère le dossier de l'application, dossier où nous avons le droit d'écrire nos fichiers
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         
+        // Nous créons une URL de destination pour le fichier
+        let destinationUrl = documentsDirectory.appendingPathComponent(url.lastPathComponent)
+        
+        do {
+            // Puis nous copions le fichier depuis l'URL source vers l'URL de destination
+            try FileManager.default.copyItem(at: url, to: destinationUrl)
+        } catch {
+            print(error)
+        }
     }
 }
 
