@@ -129,7 +129,7 @@ extension DocumentTableViewController : QLPreviewControllerDataSource {
 // Partie 10
 extension DocumentTableViewController : UIDocumentPickerDelegate {
     @objc func addDocument() {
-        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [])
+        let documentPicker = UIDocumentPickerViewController(forOpeningContentTypes: [.item])
         documentPicker.delegate = self
         documentPicker.modalPresentationStyle = .overFullScreen
         present(documentPicker, animated: true)
@@ -148,6 +148,9 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
         
         // Copie du fichier
         copyFileToDocumentsDirectory(fromUrl: url)
+        
+        // Reload data
+        tableView.reloadData()
     }
     
     func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
@@ -164,7 +167,16 @@ extension DocumentTableViewController : UIDocumentPickerDelegate {
         do {
             // Puis nous copions le fichier depuis l'URL source vers l'URL de destination
             try FileManager.default.copyItem(at: url, to: destinationUrl)
-            //fileList = listFileInBundle()
+            
+            let resourcesValues = try! destinationUrl.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
+            
+            self.fileList!.append(DocumentFile(
+                title: resourcesValues.name!,
+                size: resourcesValues.fileSize ?? 0,
+                imageName: url.lastPathComponent,
+                url: destinationUrl,
+                type: resourcesValues.contentType!.description)
+            )
         } catch {
             print(error)
         }
