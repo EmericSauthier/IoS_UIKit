@@ -11,6 +11,7 @@ import QuickLook
 class DocumentTableViewController: UITableViewController {
     
     var fileList: [DocumentFile]?
+    var importList: [DocumentFile]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,18 +21,22 @@ class DocumentTableViewController: UITableViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument))
         
         fileList = listFileInBundle()
+        importList = listImportedFiles()
     }
     
     // MARK: - Table view data source
     
     // Indique au Controller combien de sections il doit afficher
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return section == 0 ? "Importés" : "Bundle"
     }
     
     // Indique au Controller combien de cellules il doit afficher
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return fileList!.count
+        return section == 0 ? importList!.count : fileList!.count
         // return DocumentFile.documents.count
     }
     
@@ -39,7 +44,7 @@ class DocumentTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DocumentCell", for: indexPath)
         
-        let document = fileList![indexPath.row]
+        let document = indexPath.section == 0 ? importList![indexPath.row] : fileList![indexPath.row]
         cell.textLabel?.text = "\(document.title)"
         cell.detailTextLabel?.text = "\(document.size.formattedSize())"
         
@@ -79,6 +84,30 @@ class DocumentTableViewController: UITableViewController {
         }
         // Retourne la liste de documents
         return documentListBundle
+    }
+    
+    // Récupère les fichiers importés
+    func listImportedFiles() -> [DocumentFile] {
+        let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        
+        let items = try! FileManager.default.contentsOfDirectory(at: documentsDirectory, includingPropertiesForKeys: nil)
+        
+        var documentsList = [DocumentFile]()
+        
+        for item in items {
+            let resourcesValues = try! item.resourceValues(forKeys: [.contentTypeKey, .nameKey, .fileSizeKey])
+            
+            // Ajout un document à la liste
+            documentsList.append(DocumentFile(
+                title: resourcesValues.name!,
+                size: resourcesValues.fileSize ?? 0,
+                imageName: item.lastPathComponent,
+                url: item,
+                type: resourcesValues.contentType!.description)
+            )
+        }
+        
+        return documentsList
     }
     
     // On utilise plus un segue, nous devons donc utiliser le navigationController pour afficher le QLPreviewController
