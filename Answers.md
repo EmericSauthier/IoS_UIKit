@@ -75,6 +75,21 @@ Les constraints permettent donc de gérer l'affichage (position, taille ...) des
 AutoLayout gère ces contraintes automatiquement, afin de centrer l'élément par exemple.
 
 # 9 - QLPreview
-## Questions
+## Exercice 1
 ### Pourquoi serait-il plus pertinent de changer l’accessory de nos cellules pour un disclosureIndicator ?
-Parce que
+Ce changement serait pertinent afin de mettre en évidence le changement de vue lors du clic sur une ligne. Cela rendrait l'interface plus intuitive pour l'utilisateur.
+
+# 10 - Importation
+## Exercice 2
+### Expliquez ce qu’est un #selector en Swift
+Un #selector est une référence à une méthode Objective-C.
+
+### Que représente .add dans notre appel ?
+Le .add représente le style de l'icône du bouton, ici c'est un plus.
+
+### Expliquez également pourquoi XCode vous demande de mettre le mot clé @objc devant la fonction ciblée par le #selector
+Il faut mettre le mot clé @objc devant la fonction addDocument afin que la référence du #selector fasse le lien avec la méthode.
+
+### Peut-on ajouter plusieurs boutons dans la barre de navigation ? Si oui, comment en code ?
+Il est possible d'ajouter plusieurs boutons dans la barre de navigation, grâce aux propriétés rightBarButtonItems et leftBarButtonItems.  
+ex : navigationItem.rightBarButtonItems = [ UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument)), UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addDocument)) ]
